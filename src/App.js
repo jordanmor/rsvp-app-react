@@ -6,23 +6,36 @@ class App extends Component {
   state = {
     guests: [
       {
-        name: 'Jordan',
+        name: 'Harry',
         isConfirmed: false
       },
       {
-        name: 'Colin',
+        name: 'Hermione',
         isConfirmed: true
       },
       {
-        name: 'Corinne',
+        name: 'Ron',
         isConfirmed: false
       }
     ]
   }
 
+  toggleConfirmationAt = indexToChange => {
+    console.log(indexToChange);
+    const guests = this.state.guests.map((guest, index) => {
+      if (index === indexToChange) {
+        return {
+          ...guest,
+          isConfirmed: !guest.isConfirmed
+        }
+      }
+      return guest;
+    })
+
+    this.setState({ guests });
+  }
+
   getTotalInvited = () => this.state.guests.length;
-  // getAttendingGuests = () =>
-  // getUnconfirmedGuests = () =>
 
   render() {
     return (
@@ -59,7 +72,9 @@ class App extends Component {
             </tbody>
           </table>
 
-          <GuestList guests={this.state.guests} />
+          <GuestList 
+            guests={this.state.guests} 
+            toggleConfirmationAt={this.toggleConfirmationAt} />
 
         </div>
       </div>
