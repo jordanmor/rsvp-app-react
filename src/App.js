@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GuestList from './GuestList';
-import SearchForm from './SearchForm';
+import GuestForm from './GuestForm';
 
 class App extends Component {
 
@@ -83,7 +83,7 @@ class App extends Component {
         <header>
           <h1>RSVP</h1>
           <p>A Treehouse App</p>
-          <SearchForm 
+          <GuestForm 
             newGuestSubmitHandler={this.newGuestSubmitHandler}
             handleNameInput={e => this.handleNameInput(e.target.value)}
             value={this.state.pendingGuest}

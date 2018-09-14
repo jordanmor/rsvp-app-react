@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SearchForm = props => {
+const GuestForm = props => {
   return ( 
     <form onSubmit={props.newGuestSubmitHandler}>
       <input 
@@ -15,10 +15,10 @@ const SearchForm = props => {
    );
 }
 
-SearchForm.propTypes = {
+GuestForm.propTypes = {
   value: PropTypes.string.isRequired,
   newGuestSubmitHandler: PropTypes.func.isRequired,
   handleSubmitHandler: PropTypes.func
 }
  
-export default SearchForm;
+export default GuestForm;
