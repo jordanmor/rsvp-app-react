@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import GuestList from './GuestList';
+import SearchForm from './SearchForm';
 
 class App extends Component {
 
   state = {
     isFiltered: false,
+    pendingGuest: "",
     guests: [
       {
         name: 'Harry',
@@ -63,16 +65,35 @@ class App extends Component {
 
   getTotalInvited = () => this.state.guests.length;
 
+  handleNameInput = nameInput =>
+    this.setState({pendingGuest: nameInput});
+  
+  newGuestSubmitHandler = e => {
+    e.preventDefault();
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false
+        },
+        ...this.state.guests
+      ],
+      pendingGuest: ''
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <header>
           <h1>RSVP</h1>
           <p>A Treehouse App</p>
-          <form>
-              <input type="text" value="Safia" placeholder="Invite Someone" />
-              <button type="submit" name="submit" value="submit">Submit</button>
-          </form>
+          <SearchForm 
+            newGuestSubmitHandler={this.newGuestSubmitHandler}
+            handleNameInput={e => this.handleNameInput(e.target.value)}
+            value={this.state.pendingGuest}
+          />
         </header>
         <div className="main">
           <div>
@@ -109,6 +130,7 @@ class App extends Component {
             toggleConfirmationAt={this.toggleConfirmationAt}
             toggleEditingAt={this.toggleEditingAt}
             setNameAt={this.setNameAt}
+            isPendingGuest={this.state.pendingGuest}
           />
         </div>
       </div>
