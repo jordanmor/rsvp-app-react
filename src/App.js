@@ -124,6 +124,7 @@ class App extends Component {
             setNameAt={this.setNameAt}
             isPendingGuest={this.state.pendingGuest}
             removeGuestAt={this.removeGuestAt}
+            pendingGuest={this.state.pendingGuest}
           />
         </div>
       </div>
