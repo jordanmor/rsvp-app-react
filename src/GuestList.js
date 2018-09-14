@@ -2,23 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Guest from './Guest';
 
-const GuestList = props =>
-  <ul>
-    {props.guests
-      .filter(guest => !props.isFiltered || guest.isConfirmed)
-      .map((guest, index) =>
-        <Guest 
-          key={index} 
-          name={guest.name} 
-          isConfirmed={guest.isConfirmed}
-          isEditing={guest.isEditing}
-          handleConfirmation={() => props.toggleConfirmationAt(index)} 
-          handleToggleEditing={() => props.toggleEditingAt(index)} 
-          handleRemove={() => props.removeGuestAt(index)}
-          setName={text => props.setNameAt(text, index)}
-        />
-    )}
-  </ul>;
+const GuestList = props => {
+  return (
+    <ul>
+      {props.guests
+        .filter(guest => !props.isFiltered || guest.isConfirmed)
+        .map((guest) =>
+          <Guest 
+            key={guest.id} 
+            name={guest.name} 
+            isConfirmed={guest.isConfirmed}
+            isEditing={guest.isEditing}
+            handleConfirmation={() => props.toggleConfirmationAt(guest.id)} 
+            handleToggleEditing={() => props.toggleEditingAt(guest.id)} 
+            handleRemove={() => props.removeGuestAt(guest.id)}
+            setName={text => props.setNameAt(text, guest.id)}
+          />
+      )}
+    </ul>
+  );
+}
 
 GuestList.propTypes = {
   guests: PropTypes.array.isRequired,

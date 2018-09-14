@@ -5,34 +5,26 @@ import SearchForm from './SearchForm';
 class App extends Component {
 
   state = {
+    uniqueId: 0,
     isFiltered: false,
     pendingGuest: "",
-    guests: [
-      {
-        name: 'Harry',
-        isConfirmed: false,
-        isEditing: false
-      },
-      {
-        name: 'Hermione',
-        isConfirmed: true,
-        isEditing: false
-      },
-      {
-        name: 'Ron',
-        isConfirmed: false,
-        isEditing: true
-      }
-    ]
+    guests: []
   }
 
-  toggleGuestPropertyAt = (property, indexToChange) => {
-    const guests = this.state.guests.map((guest, index) => {
-      if (index === indexToChange) {
-        return {
-          ...guest,
-          [property]: !guest[property]
-        }
+  createNewGuest() {
+    return {
+      id: this.state.uniqueId + 1,
+      name: this.state.pendingGuest,
+      isConfirmed: false,
+      isEditing: false
+    }
+  }
+
+  toggleGuestPropertyAt = (property, guestId) => {
+    const guests = this.state.guests.map( guest => {
+      if (guest.id === guestId) {
+        guest[property] = !guest[property]
+        return guest;
       }
       return guest;
     })
@@ -40,19 +32,17 @@ class App extends Component {
     this.setState({ guests });
   }
 
-  toggleConfirmationAt = index =>
-    this.toggleGuestPropertyAt('isConfirmed', index);
+  toggleConfirmationAt = guestId =>
+    this.toggleGuestPropertyAt('isConfirmed', guestId);
 
-  toggleEditingAt = index =>
-    this.toggleGuestPropertyAt('isEditing', index);
+  toggleEditingAt = guestId =>
+    this.toggleGuestPropertyAt('isEditing', guestId);
 
-  setNameAt = (name, indexToChange) => {
-    const guests = this.state.guests.map((guest, index) => {
-      if (index === indexToChange) {
-        return {
-          ...guest,
-          name
-        }
+  setNameAt = (name, guestId) => {
+    const guests = this.state.guests.map( guest => {
+      if (guest.id === guestId) {
+        guest.name = name;
+        return guest;
       }
       return guest;
     })
@@ -68,20 +58,17 @@ class App extends Component {
   handleNameInput = nameInput =>
     this.setState({pendingGuest: nameInput});
   
-  removeGuestAt = indexToRemove => {
-    const guests = this.state.guests.filter((guest, index) => index !== indexToRemove);
+  removeGuestAt = guestId => {
+    const guests = this.state.guests.filter( guest => guest.id !== guestId);
     this.setState({ guests });
   }
   
   newGuestSubmitHandler = e => {
     e.preventDefault();
     this.setState({
+      uniqueId: this.state.uniqueId + 1,
       guests: [
-        {
-          name: this.state.pendingGuest,
-          isConfirmed: false,
-          isEditing: false
-        },
+        this.createNewGuest(),
         ...this.state.guests
       ],
       pendingGuest: ''
