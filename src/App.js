@@ -68,6 +68,11 @@ class App extends Component {
   handleNameInput = nameInput =>
     this.setState({pendingGuest: nameInput});
   
+  removeGuestAt = indexToRemove => {
+    const guests = this.state.guests.filter((guest, index) => index !== indexToRemove);
+    this.setState({ guests });
+  }
+  
   newGuestSubmitHandler = e => {
     e.preventDefault();
     this.setState({
@@ -131,6 +136,7 @@ class App extends Component {
             toggleEditingAt={this.toggleEditingAt}
             setNameAt={this.setNameAt}
             isPendingGuest={this.state.pendingGuest}
+            removeGuestAt={this.removeGuestAt}
           />
         </div>
       </div>
