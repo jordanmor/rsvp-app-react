@@ -65,14 +65,16 @@ class App extends Component {
   
   newGuestSubmitHandler = e => {
     e.preventDefault();
-    this.setState({
-      uniqueId: this.state.uniqueId + 1,
-      guests: [
-        this.createNewGuest(),
-        ...this.state.guests
-      ],
-      pendingGuest: ''
-    })
+    if (this.state.pendingGuest !== '') {
+      this.setState({
+        uniqueId: this.state.uniqueId + 1,
+        guests: [
+          this.createNewGuest(),
+          ...this.state.guests
+        ],
+        pendingGuest: ''
+      })
+    }
   }
 
   render() {
