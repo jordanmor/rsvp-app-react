@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GuestList from './GuestList';
 import GuestForm from './GuestForm';
+import Counter from './Counter';
 
 class App extends Component {
 
@@ -9,6 +10,28 @@ class App extends Component {
     isFiltered: false,
     pendingGuest: "",
     guests: []
+  }
+
+  get totalInvited() {
+    return this.state.guests.length;
+  }
+
+  get numberAttending() {
+    return this.state.guests.reduce(
+      (total, guest) => guest.isConfirmed ? total + 1 : total,
+      0
+      );
+    }
+    
+    get numberUnconfirmed() {
+      return this.totalInvited - this.numberAttending;
+    }
+    
+  get numberAttending2() {
+    return this.state.guests.reduce(
+      (total, guest) => guest.isConfirmed ? total + 1 : total,
+      0
+    );
   }
 
   createNewGuest() {
@@ -52,8 +75,6 @@ class App extends Component {
 
   toggleFilter = () => 
     this.setState({ isFiltered: !this.state.isFiltered });
-
-  getTotalInvited = () => this.state.guests.length;
 
   handleNameInput = nameInput =>
     this.setState({pendingGuest: nameInput});
@@ -101,22 +122,12 @@ class App extends Component {
               Hide those who haven't responded
             </label>
           </div>
-          <table className="counter">
-            <tbody>
-              <tr>
-                <td>Attending:</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>Unconfirmed:</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>Total:</td>
-                <td>3</td>
-              </tr>
-            </tbody>
-          </table>
+
+          <Counter 
+            numberAttending={this.numberAttending}
+            numberUnconfirmed={this.numberUnconfirmed}
+            totalInvited={this.totalInvited}
+          />
 
           <GuestList 
             guests={this.state.guests} 
