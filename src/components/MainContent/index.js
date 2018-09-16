@@ -22,10 +22,10 @@ const MainContent = props => {
       <GuestList 
         guests={props.guests} 
         isFiltered={props.isFiltered}
-        toggleConfirmationAt={props.toggleConfirmationAt}
-        toggleEditingAt={props.toggleEditingAt}
-        setNameAt={props.setNameAt}
-        removeGuestAt={props.removeGuestAt}
+        toggleConfirmation={props.toggleConfirmation}
+        toggleEditing={props.toggleEditing}
+        setName={props.setName}
+        removeGuest={props.removeGuest}
         pendingGuest={props.pendingGuest}
       />
 
@@ -41,10 +41,10 @@ MainContent.propTypes = {
   guests: PropTypes.array.isRequired,
   isFiltered: PropTypes.bool.isRequired,
   toggleFilter: PropTypes.func.isRequired,
-  toggleConfirmationAt: PropTypes.func.isRequired,
-  toggleEditingAt: PropTypes.func.isRequired,
-  removeGuestAt: PropTypes.func.isRequired,
-  setNameAt: PropTypes.func.isRequired
+  toggleConfirmation: PropTypes.func.isRequired,
+  toggleEditing: PropTypes.func.isRequired,
+  removeGuest: PropTypes.func.isRequired,
+  setName: PropTypes.func.isRequired
 }
  
 export default MainContent;
