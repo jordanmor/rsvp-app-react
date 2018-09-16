@@ -5,11 +5,12 @@ import MainContent from './components/MainContent';
 class App extends Component {
 
   state = {
-    uniqueId: 0,
     isFiltered: false,
     pendingGuest: "",
     guests: []
   }
+
+  uniqueId = 0;
 
   get totalInvited() {
     return this.state.guests.length;
@@ -34,12 +35,16 @@ class App extends Component {
   }
 
   createNewGuest() {
-    return {
-      id: this.state.uniqueId + 1,
+    const newGuest = {
+      id: this.uniqueId,
       name: this.state.pendingGuest,
       isConfirmed: false,
       isEditing: false
-    }
+    };
+
+    this.uniqueId++;
+
+    return newGuest;
   }
 
   toggleGuestPropertyAt = (property, guestId) => {
