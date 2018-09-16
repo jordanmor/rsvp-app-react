@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import MainContent from './MainContent';
+import Header from './components/Header';
+import MainContent from './components/MainContent';
 
 class App extends Component {
 
@@ -107,7 +107,6 @@ class App extends Component {
         />
         <MainContent 
           toggleFilter={this.toggleFilter}
-          isFiltered={this.isFiltered}
           numberAttending={this.numberAttending}
           numberUnconfirmed={this.numberUnconfirmed}
           totalInvited={this.totalInvited}
