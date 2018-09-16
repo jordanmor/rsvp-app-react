@@ -1,2 +1,2 @@
-# rsvp-app-react
-Treehouse Tutorial - Learn React by building a RSVP app
+# RSVP App
+Treehouse Tutorial - Learn React by building an RSVP app
