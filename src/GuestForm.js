@@ -6,7 +6,7 @@ const GuestForm = props => {
     <form onSubmit={props.newGuestSubmitHandler}>
       <input 
         type="text" 
-        value={props.value}
+        value={props.pendingGuest}
         placeholder="Invite Someone"
         onChange={props.handleNameInput}
       />
@@ -16,7 +16,7 @@ const GuestForm = props => {
 }
 
 GuestForm.propTypes = {
-  value: PropTypes.string.isRequired,
+  pendingGuest: PropTypes.string.isRequired,
   newGuestSubmitHandler: PropTypes.func.isRequired,
   handleSubmitHandler: PropTypes.func
 }
